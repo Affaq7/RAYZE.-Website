@@ -4,6 +4,8 @@ The repository began with the specification and supplied logos only. No legacy a
 
 ## Checks performed
 
+- Page-wide motion update: lint, TypeScript and production build passed. Production browser checks confirmed shared text reveals on services, about, contact, work, careers, privacy and admin login; mobile scrolling showed active upward transforms that cleared after completion, no overflow, and animated form labels. Route changes registered the new page's text without retaining old reveal styles. Authenticated admin/job-detail rendering still requires configured data; those routes use the same root motion component.
+
 - ESLint, strict TypeScript checks, 17 focused Vitest tests, and an optimized Next.js production build passed.
 - HTTP smoke checks passed against both development and the production server: public routes, metadata, CSP, security headers, protected admin redirects, robots/sitemap exclusions, missing-role behavior, same-origin rejection, honeypot response, input rejection and honest unavailable-service responses.
 - Focused tests mock service boundaries. They cover verified admin identity and allowlist denial, private resume authorization, unsafe URLs, explicit write fields, rate-limit denial/unavailability, PDF validation, private-bucket enforcement, bounded multipart bodies, committed contact submissions, duplicate requests, closed roles and uploaded-file cleanup after persistence failures.

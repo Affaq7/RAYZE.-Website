@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { siteUrl } from "@/lib/env";
 import "./globals.css";
+import { Motion } from "@/components/motion/motion";
 const inter = localFont({
   src: "../../public/fonts/inter-latin-wght-normal.woff2",
   weight: "100 900",
@@ -35,6 +36,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Motion />
       </body>
     </html>
   );
