@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T21:41:51.410Z",
+  "title": "Design System: RAYZE",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "RAYZE Red"
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Deep Black"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Black"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "White"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Secondary Gray"
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Divider Gray"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Temporary Inter Display",
+        "purpose": "Hero heading; licensed Delight Black remains required."
+      },
+      "headline": {
+        "displayName": "Temporary Inter Headline",
+        "purpose": "Section headings; licensed Delight ExtraBold remains required."
+      },
+      "title": {
+        "displayName": "Temporary Inter Title",
+        "purpose": "Titles; licensed Delight Bold remains required."
+      },
+      "body": {
+        "displayName": "Inter Body",
+        "purpose": "Descriptions and form content."
+      },
+      "label": {
+        "displayName": "Inter Label",
+        "purpose": "Dash-prefixed uppercase overlines."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "0.18s",
+        "purpose": "Color, border and background state changes."
+      },
+      {
+        "name": "arrow-transition",
+        "value": "0.2s",
+        "purpose": "Secondary-link arrow movement."
+      },
+      {
+        "name": "marquee",
+        "value": "38s linear infinite",
+        "purpose": "Service text; pause, visibility and reduced-motion controlled."
+      },
+      {
+        "name": "mark-drift",
+        "value": "12s ease-in-out infinite",
+        "purpose": "Supplied mark; pause, visibility and reduced-motion controlled."
+      },
+      {
+        "name": "gsap-entrance-ease",
+        "value": "power3.out",
+        "purpose": "Short hero and section transform entrances."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "700px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1000px"
+      },
+      {
+        "name": "wide-min",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Project enquiry and form actions.",
+      "html": "<a class=\"ds-button\" href=\"#contact\">Start a project <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;padding:17px 22px;min-height:58px;background:var(--accent,#e8241a);border:1px solid var(--accent,#e8241a);color:var(--background,#0a0a0a);font:700 13px var(--font-inter,Arial),sans-serif;text-decoration:none;border-radius:0;transition:color .18s,border-color .18s,background .18s}.ds-button:hover{background:white;border-color:white;color:black}.ds-button:focus-visible{outline:2px solid white;outline-offset:5px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "description": "Underlined secondary navigation with a moving arrow.",
+      "html": "<a class=\"ds-link\" href=\"#services\">Explore the services <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-link{display:inline-flex;align-items:center;gap:26px;font:600 13px var(--font-inter,Arial),sans-serif;color:var(--text,#fff);border-bottom:1px solid var(--muted,#9a9a9a);padding:12px 0;min-height:44px;text-decoration:none}.ds-link:hover{color:white;border-color:var(--accent,#e8241a)}.ds-link svg{transition:transform .2s}.ds-link:hover svg,.ds-link:focus-visible svg{transform:translateX(5px)}.ds-link:focus-visible{outline:2px solid white;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-link svg{transition:none}}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Readable outlined field on a raised dark surface.",
+      "html": "<label class=\"ds-label\">Your name<input class=\"ds-input\" placeholder=\"Your name\" /></label>",
+      "css": ".ds-label{display:flex;flex-direction:column;gap:9px;color:var(--text,#fff);font:400 13px var(--font-inter,Arial),sans-serif}.ds-input{background:var(--surface,#141414);color:var(--text,#fff);border:1px solid var(--muted,#9a9a9a);border-radius:0;padding:14px 16px;caret-color:var(--accent,#e8241a);font:400 16px var(--font-inter,Arial),sans-serif}.ds-input::placeholder{color:var(--muted,#9a9a9a)}.ds-input:focus-visible{outline:2px solid white;outline-offset:5px}"
+    },
+    {
+      "name": "Navigation Links",
+      "kind": "nav",
+      "description": "Public navigation current-page underline; mark is omitted from the standalone snippet to preserve the supplied asset.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a href=\"#services\" aria-current=\"page\">Services</a><a href=\"#work\">Work</a><a href=\"#about\">About</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;align-items:center;gap:34px;font:400 13px var(--font-inter,Arial),sans-serif}.ds-nav a{color:var(--text,#fff);padding:12px 0;text-decoration:none;transition:color .18s}.ds-nav a[aria-current=page]{text-decoration:underline;text-decoration-color:var(--accent,#e8241a);text-underline-offset:8px}.ds-nav a:hover{color:var(--muted,#9a9a9a)}.ds-nav a:focus-visible{outline:2px solid white;outline-offset:5px}"
+    },
+    {
+      "name": "Project Filters",
+      "kind": "chip",
+      "refersTo": "button-filter-selected",
+      "description": "Square, pressed-state project filtering.",
+      "html": "<div class=\"ds-filters\"><button aria-pressed=\"true\">All</button><button aria-pressed=\"false\">Brand Design</button></div>",
+      "css": ".ds-filters{display:flex;flex-wrap:wrap;gap:10px}.ds-filters button{background:none;color:var(--text,#fff);border:1px solid var(--border,#262626);border-radius:0;padding:10px 18px;font:400 13px var(--font-inter,Arial),sans-serif;cursor:pointer;transition:color .18s,border-color .18s,background .18s}.ds-filters button[aria-pressed=true]{background:white;color:black}.ds-filters button:focus-visible{outline:2px solid white;outline-offset:5px}"
+    },
+    {
+      "name": "Service Action",
+      "kind": "button",
+      "refersTo": "service-action",
+      "description": "Square enquiry arrow with equivalent hover and keyboard states.",
+      "html": "<a class=\"ds-service\" href=\"#contact\" aria-label=\"Enquire about Website\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M5 19 19 5M5 5h14v14\"/></svg></a>",
+      "css": ".ds-service{display:grid;place-items:center;width:56px;height:56px;border:1px solid var(--muted,#9a9a9a);border-radius:0;color:var(--text,#fff);transition:color .18s,border-color .18s,background .18s}.ds-service:hover,.ds-service:focus-visible{background:var(--accent,#e8241a);color:black;border-color:var(--accent,#e8241a)}.ds-service:focus-visible{outline:2px solid white;outline-offset:5px}"
+    },
+    {
+      "name": "Empty Work Container",
+      "kind": "card",
+      "refersTo": "work-empty",
+      "description": "Truthful raised-surface fallback when no published projects are available.",
+      "html": "<article class=\"ds-empty\"><h3>The next thing<br/>could be yours.</h3><p>Our project collection is being prepared.</p></article>",
+      "css": ".ds-empty{background:var(--surface,#141414);color:var(--text,#fff);padding:60px;border-radius:0}.ds-empty h3{margin:0;text-transform:uppercase;font:700 32px/1.02 var(--font-inter,Arial),sans-serif;letter-spacing:-.04em}.ds-empty p{color:var(--muted,#9a9a9a);font:400 14px/1.65 var(--font-inter,Arial),sans-serif;margin:22px 0 0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Rise with RAYZE.",
+    "overview": "RAYZE is direct, expansive and editorial. Heavy typography, black negative space and the supplied angular red mark carry the identity. Fine dividers and varied section proportions give information a deliberate rhythm; the public site invites enquiries while private admin screens prioritize operating tasks.\n\nThe implementation expresses the owner's established brand commitments. It uses real supplied identity assets and truthful empty states while published project media and reviews are unavailable. This document records implemented visual behavior, not verification of production data, submissions or deployment.",
+    "keyCharacteristics": [
+      "Oversized uppercase headings and dash-prefixed overlines.",
+      "One red accent, neutral surfaces and sharp corners.",
+      "Asymmetric desktop composition that stacks on small screens.",
+      "Underlined links, square arrow actions and a full-bleed red conversion section.",
+      "Progressive motion with reduced-motion and pause support."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Use RAYZE Red as the only UI accent; do not invent additional accent colors or tonal palettes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Red Rule",
+        "body": "Use dark text for small text on red surfaces. White remains the main text color on dark surfaces. Process indices use Secondary Gray; large red typography and arrow artwork retain their emphasis.",
+        "section": "colors"
+      },
+      {
+        "name": "The Honest Font Rule",
+        "body": "Keep the temporary Inter headings explicit until licensed Delight weights are available, and preserve the intended 900/800/700 hierarchy.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do preserve the exact brand tokens, supplied mark and sharp corners.",
+      "Do retain uppercase heading hierarchy and dash-prefixed overlines.",
+      "Do use dark small text on red and visible keyboard focus on every interactive control.",
+      "Do keep published media genuine and unavailable content truthful.",
+      "Do preserve reduced-motion, pause, offscreen and hidden-page behavior.",
+      "Do keep temporary Inter headings explicit pending licensed Delight."
+    ],
+    "donts": [
+      "Don't add UI accent colors, pill controls, glow, glassmorphism or decorative blobs.",
+      "Don't fabricate clients, testimonials, case studies, portraits or performance statistics.",
+      "Don't replace the supplied mark, distort it, recolor it with filters or duplicate the wordmark.",
+      "Don't hide essential content until JavaScript runs or trap scrolling.",
+      "Don't treat visual review as proof that production integrations or deployment are verified.\r"
+    ]
+  }
+}
