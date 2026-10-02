@@ -4,6 +4,10 @@ The repository began with the specification and supplied logos only. No legacy a
 
 ## Checks performed
 
+- Every pathname change remounts content with CSS fade/slide entrances before paint, including the initial viewport. Real sections animate when they mount after any loading state. Scroll reveals remain separately prepared offscreen to avoid the earlier opacity flash. Reduced-motion mode disables page entrances. One explicitly labeled static demo review appears on the homepage only when real published reviews are absent and `SHOW_DEMO_REVIEW` is not `false`; it is never inserted into Supabase.
+
+- Shared scroll entrances combine text slide-up with opacity fade-in. Offscreen content is prepared before entering the viewport, and reveals animate toward full opacity without resetting it on entry. Content already visible at initialization or streamed into view is never hidden. Standalone images, video, SVG artwork and icon-only controls receive fades without overriding media transforms. Initial server HTML remains visible, and reduced-motion mode skips the entrance effects.
+
 - Page-wide motion update: lint, TypeScript and production build passed. Production browser checks confirmed shared text reveals on services, about, contact, work, careers, privacy and admin login; mobile scrolling showed active upward transforms that cleared after completion, no overflow, and animated form labels. Route changes registered the new page's text without retaining old reveal styles. Authenticated admin/job-detail rendering still requires configured data; those routes use the same root motion component.
 
 - ESLint, strict TypeScript checks, 17 focused Vitest tests, and an optimized Next.js production build passed.

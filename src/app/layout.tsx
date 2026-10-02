@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { siteUrl } from "@/lib/env";
 import "./globals.css";
 import { Motion } from "@/components/motion/motion";
+import { PageTransition } from "@/components/motion/page-transition";
 const inter = localFont({
   src: "../../public/fonts/inter-latin-wght-normal.woff2",
   weight: "100 900",
@@ -35,7 +36,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        {children}
+        <PageTransition>{children}</PageTransition>
         <Motion />
       </body>
     </html>

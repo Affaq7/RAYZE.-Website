@@ -19,20 +19,36 @@ export function Motion(){
     const selector='h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,label,a,button,span,small,summary,th,td,figcaption,legend,div';
     const candidates=Array.from(document.querySelectorAll<HTMLElement>('main,footer')).flatMap(root=>Array.from(root.querySelectorAll<HTMLElement>(selector))).filter(el=>{
      if(el.closest('[aria-hidden="true"],.marquee,.motion-control,.services-section .service-number,[role="alert"],[role="status"]')) return false;
-     if(!Array.from(el.childNodes).some(node=>node.nodeType===Node.TEXT_NODE&&node.textContent?.trim())) return false;
+     if(!Array.from(el.childNodes).some(node=>node.nodeType===Node.TEXT_NODE&&node.textContent?.trim())&&!(el.matches('a,button')&&el.querySelector('svg'))) return false;
      return !el.matches('div,li,label,a,button')||!el.querySelector('h1,h2,h3,h4,h5,h6,p,li,label');
     });
     const candidateSet=new Set(candidates);
-    const fresh=candidates.filter(el=>{
+    const media=Array.from(document.querySelectorAll<HTMLElement>('main img,main video,main svg,footer img,footer svg')).filter(el=>{
+     if(el.closest('.marquee'))return false;
+     for(let parent=el.parentElement;parent;parent=parent.parentElement)if(candidateSet.has(parent))return false;
+     return true;
+    });
+    const mediaSet=new Set(media);
+    const fresh=[...candidates,...media].filter(el=>{
      if(seen.has(el)) return false;
      for(let parent=el.parentElement;parent;parent=parent.parentElement) if(candidateSet.has(parent)) return false;
      seen.add(el);return true;
     });
     fresh.forEach(el=>{el.dataset.textReveal='';animated.add(el);});
-    if(!fresh.length)return;
-    triggers.push(...ScrollTrigger.batch(fresh,{start:'top 94%',once:true,interval:.08,batchMax:8,onEnter:elements=>{
-     // Start only on entry; essential text remains readable before JS runs.
-     tweens.push(gsap.fromTo(elements,{y:24},{y:0,duration:.65,stagger:.045,ease:'power3.out',clearProps:'transform'}));
+    // Never hide text the visitor can already see (including streamed content).
+    // Prepare offscreen elements now, before scrolling can bring them into view.
+    const pending=fresh.filter(el=>el.getBoundingClientRect().top>=window.innerHeight);
+    if(!pending.length)return;
+    const pendingText=pending.filter(el=>!mediaSet.has(el));
+    const pendingMedia=pending.filter(el=>mediaSet.has(el));
+    if(pendingText.length)tweens.push(gsap.set(pendingText,{y:24,opacity:0}));
+    if(pendingMedia.length)tweens.push(gsap.set(pendingMedia,{opacity:0}));
+    triggers.push(...ScrollTrigger.batch(pending,{start:'top 98%',once:true,interval:.04,batchMax:8,onEnter:elements=>{
+     const text=elements.filter(el=>!mediaSet.has(el as HTMLElement));
+     const visuals=elements.filter(el=>mediaSet.has(el as HTMLElement));
+     if(text.length)tweens.push(gsap.to(text,{y:0,opacity:1,duration:.65,stagger:.045,ease:'power3.out',clearProps:'transform,opacity'}));
+     // Keep media transforms free for the existing parallax and logo loop.
+     if(visuals.length)tweens.push(gsap.to(visuals,{opacity:1,duration:.75,stagger:.045,ease:'power3.out',clearProps:'opacity'}));
     }}));
     ScrollTrigger.refresh();
    };
@@ -45,7 +61,7 @@ export function Motion(){
     if(rows.length){const timeline=gsap.timeline({scrollTrigger:{trigger:'.services-section .service-list',start:'top 75%',end:'bottom 35%',scrub:.4}});rows.forEach(row=>timeline.fromTo(row.querySelector('.service-number'),{y:10},{y:0,duration:1}));}
     gsap.utils.toArray<HTMLElement>('.project img').forEach(el=>gsap.fromTo(el,{y:12},{y:-12,scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}}));
    }
-   return()=>{contentObserver.disconnect();cancelAnimationFrame(frame);triggers.forEach(trigger=>trigger.kill());tweens.forEach(tween=>tween.revert());animated.forEach(el=>delete el.dataset.textReveal);};
+   return()=>{contentObserver.disconnect();cancelAnimationFrame(frame);triggers.forEach(trigger=>trigger.kill());[...tweens].reverse().forEach(tween=>tween.revert());animated.forEach(el=>delete el.dataset.textReveal);};
   });
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{(entry.target as HTMLElement).dataset.offscreen=String(!entry.isIntersecting);}));
   document.querySelectorAll('.hero-mark img,.marquee-track').forEach(el=>observer.observe(el));

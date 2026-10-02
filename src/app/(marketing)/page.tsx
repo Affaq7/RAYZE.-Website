@@ -8,6 +8,13 @@ import { Marquee, MotionControl } from "@/components/motion/motion";
 import { publicContent } from "@/lib/services/public";
 export default async function Home() {
   const { projects, reviews } = await publicContent();
+  const demoReview = reviews.length === 0 && process.env.SHOW_DEMO_REVIEW !== "false";
+  const displayedReviews = demoReview ? [{
+    id: "demo-review",
+    name: "Sample client",
+    role: "Demo review · Not a real testimonial",
+    quote: "Working with RAYZE felt clear, collaborative and considered—from the first idea to the final details.",
+  }] : reviews;
   return (
     <>
       <section className="hero wrap">
@@ -143,15 +150,15 @@ export default async function Home() {
           ))}
         </ol>
       </section>
-      {reviews.length > 0 && (
+      {displayedReviews.length > 0 && (
         <section className="wrap section reviews">
-          <p className="overline">— IN THEIR WORDS</p>
+          <p className="overline">{demoReview ? "— DEMO REVIEW / PREVIEW ONLY" : "— IN THEIR WORDS"}</p>
           <h2>
             GOOD WORK.
             <br />
-            REAL CONNECTIONS.
+            {demoReview ? "CLEAR FEEDBACK." : "REAL CONNECTIONS."}
           </h2>
-          {reviews.map((r) => (
+          {displayedReviews.map((r) => (
             <figure key={r.id}>
               <blockquote>“{r.quote}”</blockquote>
               <figcaption>

@@ -10,7 +10,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-On Windows, copy `.env.example` to `.env.local` using Explorer or `Copy-Item`. Open http://localhost:3000. The unconfigured site shows useful empty project/job states; legitimate forms return an unavailable error rather than pretending to persist anything. No fictional clients, reviews or people are seeded.
+On Windows, copy `.env.example` to `.env.local` using Explorer or `Copy-Item`. Open http://localhost:3000. The unconfigured site shows useful empty project/job states; legitimate forms return an unavailable error rather than pretending to persist anything. No fictional database records are seeded. At the owner's request, the homepage shows one clearly labeled illustrative demo review when no published reviews exist. Set `SHOW_DEMO_REVIEW=false` to hide it before launch; real published reviews automatically replace it.
 
 ```sh
 npm run lint
