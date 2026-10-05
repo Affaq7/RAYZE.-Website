@@ -71,3 +71,5 @@ export function Motion(){
 }
 export function MotionControl(){const [paused,setPaused]=useState(false);useEffect(()=>{document.documentElement.dataset.motion=paused?'paused':'running';return()=>{delete document.documentElement.dataset.motion;};},[paused]);return <button className="motion-control" onClick={()=>setPaused(!paused)} aria-pressed={paused}>{paused?'Play motion':'Pause motion'} <span aria-hidden="true">{paused?'▷':'Ⅱ'}</span></button>;}
 export function Marquee(){return <div className="marquee" aria-label="Strategy, identity, content, digital"><div className="marquee-track">{[0,1].map(n=><span key={n} aria-hidden={n===1}>STRATEGY <i><Arrow diagonal/></i> IDENTITY <i><Arrow diagonal/></i> CONTENT <i><Arrow diagonal/></i> DIGITAL <i><Arrow diagonal/></i> </span>)}</div></div>;}
+
+

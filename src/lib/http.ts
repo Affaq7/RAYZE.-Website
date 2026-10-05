@@ -48,7 +48,11 @@ async function boundedBody(request: Request, limit: number) {
     if (done) break;
     size += value.byteLength;
     if (size > limit) {
-      await reader.cancel();
+      try {
+        while (!(await reader.read()).done) {}
+      } catch {
+        // Stream may already be closed
+      }
       throw new HttpError(413, "Upload is too large.");
     }
     chunks.push(value);

@@ -1,42 +1,101 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Brand } from "./header";
 import { Arrow } from "@/components/ui/arrow";
+import { AsciiFooter } from "@/components/sections/ascii-footer";
+
 export function CTA() {
   return (
     <section className="cta">
       <p className="overline">— YOUR NEXT CHAPTER</p>
       <Link href="/contact">
         <h2>
-          LET’S MAKE
+          READY TO
           <br />
-          SOMETHING MATTER.
+          RISE?
         </h2>
         <Arrow diagonal />
       </Link>
-      <p>A new brand. A better website. An idea ready to move.</p>
+      <p>Let’s build something worth remembering.</p>
     </section>
   );
 }
+
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/") {
+    return <AsciiFooter />;
+  }
+  const serviceLinks = [
+    { label: "Identity", href: "/services" },
+    { label: "Content", href: "/services" },
+    { label: "Digital", href: "/services" },
+    { label: "Strategy", href: "/services" },
+  ];
+
+  const socialLinks = [
+    { label: "Instagram", href: "https://instagram.com" },
+    { label: "LinkedIn", href: "https://linkedin.com" },
+    { label: "Facebook", href: "https://facebook.com" },
+    { label: "TikTok", href: "https://tiktok.com" },
+    { label: "YouTube", href: "https://youtube.com" },
+  ];
+
   return (
     <footer className="footer">
-      <div className="footer-top">
-        <Brand />
-        <p>
-          Creative thinking.
-          <br />
-          Forward motion.
-        </p>
-        <nav aria-label="Footer">
-          <Link href="/services">Services</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/about">About</Link>
-          <Link href="/careers">Careers</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
+      <div className="footer-grid">
+        {/* Brand & Tagline */}
+        <div className="footer-col-brand">
+          <Brand />
+          <p className="footer-tagline">Rise with RAYZE.</p>
+        </div>
+
+        {/* Services Navigation */}
+        <div className="footer-col">
+          <span className="footer-heading">Services</span>
+          <nav aria-label="Footer Services">
+            {serviceLinks.map((s) => (
+              <Link key={s.label} href={s.href}>
+                {s.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        {/* Socials */}
+        <div className="footer-col">
+          <span className="footer-heading">Connect</span>
+          <nav aria-label="Footer Socials">
+            {socialLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Contact */}
+        <div className="footer-col">
+          <span className="footer-heading">Get in touch</span>
+          <a
+            href="mailto:hello@rayze.studio"
+            className="footer-contact-link"
+          >
+            hello@rayze.studio
+          </a>
+        </div>
       </div>
+
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} RAYZE.</span>
+        <span>© 2026 RAYZE. All rights reserved.</span>
         <span>Rise with RAYZE.</span>
         <Link href="/privacy">Privacy</Link>
         <a href="#top">Back to top ↑</a>

@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Arrow } from "@/components/ui/arrow";
-import { CTA } from "@/components/layout/footer";
-import { Services } from "@/components/sections/services";
+import { ServicesStack } from "@/components/sections/services-stack";
 import { WorkGrid } from "@/components/sections/work";
-import { Marquee, MotionControl } from "@/components/motion/motion";
+import { Hero } from "@/components/sections/hero";
 import { publicContent } from "@/lib/services/public";
+
 export default async function Home() {
   const { projects, reviews } = await publicContent();
   const demoReview = reviews.length === 0 && process.env.SHOW_DEMO_REVIEW !== "false";
@@ -15,50 +14,10 @@ export default async function Home() {
     role: "Demo review · Not a real testimonial",
     quote: "Working with RAYZE felt clear, collaborative and considered—from the first idea to the final details.",
   }] : reviews;
+
   return (
     <>
-      <section className="hero wrap">
-        <div className="hero-top">
-          <p className="overline">
-            — INDEPENDENT THINKING. CONNECTED CREATIVITY.
-          </p>
-          <span className="hero-index">BRAND / CONTENT / DIGITAL</span>
-        </div>
-        <div className="hero-main">
-          <h1>
-            RISE WITH
-            <br />
-            <span>RAYZE.</span>
-          </h1>
-          <div className="hero-mark">
-            <Image
-              src="/logos/mark-red.png"
-              alt=""
-              width={419}
-              height={403}
-              priority
-            />
-            <span className="mark-caption">BUILT TO MOVE YOU FORWARD.</span>
-          </div>
-        </div>
-        <div className="hero-bottom">
-          <p>
-            We turn bold thinking into brands,
-            <br />
-            content and digital experiences
-            <br />
-            that move your business forward.
-          </p>
-          <Link className="button" href="/contact">
-            Start a project <Arrow diagonal />
-          </Link>
-          <div className="hero-scroll">
-            <MotionControl />
-            <a href="#intro">Explore RAYZE ↓</a>
-          </div>
-        </div>
-      </section>
-      <Marquee />
+      <Hero />
       <section id="intro" className="intro wrap section" data-reveal>
         <p className="overline">— A CREATIVE PARTNER FOR WHAT’S NEXT</p>
         <div>
@@ -95,27 +54,7 @@ export default async function Home() {
         </div>
         <WorkGrid projects={projects.slice(0, 4)} />
       </section>
-      <section className="wrap section services-section">
-        <div className="section-heading">
-          <div>
-            <p className="overline">— WHAT WE DO</p>
-            <h2>
-              SIX WAYS
-              <br />
-              TO RISE.
-            </h2>
-          </div>
-          <p>
-            From the first impression
-            <br />
-            to the systems behind it.
-          </p>
-        </div>
-        <Services />
-        <Link className="text-link services-all" href="/services">
-          Explore the services <Arrow />
-        </Link>
-      </section>
+      <ServicesStack />
       <section className="process wrap section" data-reveal>
         <div>
           <p className="overline">— FROM IDEA TO IMPACT</p>
@@ -168,7 +107,6 @@ export default async function Home() {
           ))}
         </section>
       )}
-      <CTA />
     </>
   );
 }
