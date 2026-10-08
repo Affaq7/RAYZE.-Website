@@ -42,14 +42,18 @@ export function RayzeLoader() {
     };
     const inOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
-    // Lights: soft white + Rayze crimson accent
-    scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-    const keyLight = new THREE.DirectionalLight(0xffffff, 0.9);
-    keyLight.position.set(2, 4, 6);
+    // Lights: soft ambient + key light + Rayze crimson accent
+    scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    keyLight.position.set(3, 5, 6);
     scene.add(keyLight);
 
-    const redLight = new THREE.PointLight(0xff2a00, 3, 26);
-    redLight.position.set(-6, -3, 4);
+    const rimLight = new THREE.DirectionalLight(0xff4433, 0.6);
+    rimLight.position.set(-4, -2, 3);
+    scene.add(rimLight);
+
+    const redLight = new THREE.PointLight(0xe8241a, 4, 26);
+    redLight.position.set(-6, -3, 5);
     scene.add(redLight);
 
     // Faint red glow behind the logo
@@ -61,8 +65,8 @@ export function RayzeLoader() {
 
     if (gx) {
       const gr = gx.createRadialGradient(64, 64, 0, 64, 64, 64);
-      gr.addColorStop(0, "rgba(255, 60, 20, 0.55)");
-      gr.addColorStop(1, "rgba(255, 30, 0, 0)");
+      gr.addColorStop(0, "rgba(232, 36, 26, 0.55)");
+      gr.addColorStop(1, "rgba(232, 36, 26, 0)");
       gx.fillStyle = gr;
       gx.fillRect(0, 0, 128, 128);
       haloTexture = new THREE.CanvasTexture(gc);
@@ -116,10 +120,10 @@ export function RayzeLoader() {
     ];
 
     const mat = new THREE.MeshStandardMaterial({
-      color: 0xffffff,
-      roughness: 0.3,
-      metalness: 0.1,
-      emissive: 0x180400,
+      color: 0xe8241a,
+      roughness: 0.22,
+      metalness: 0.2,
+      emissive: 0x3d0605,
     });
 
     const logo = new THREE.Group();
@@ -285,7 +289,7 @@ export function RayzeLoader() {
             display: "block",
             height: "100%",
             width: "0%",
-            background: "#ff2a00",
+            background: "#e8241a",
             transition: "width 0.1s linear",
           }}
         />
