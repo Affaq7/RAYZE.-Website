@@ -260,6 +260,7 @@ export function SelectedWork() {
 
   // Pointer drag gestures
   const handlePointerDown = (e: React.PointerEvent, i: number) => {
+    if ((e.target as HTMLElement).closest(".ar")) return;
     dragRef.current = { x: e.clientX, i, m: false };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
@@ -277,6 +278,7 @@ export function SelectedWork() {
   };
 
   const handlePointerUp = (e: React.PointerEvent, i: number) => {
+    if ((e.target as HTMLElement).closest(".ar")) return;
     if (!dragRef.current) return;
     const dx = e.clientX - dragRef.current.x;
     const d = dragRef.current;
@@ -363,7 +365,8 @@ export function SelectedWork() {
                     "--g": proj.gradient,
                   } as React.CSSProperties
                 }
-                onClick={() => {
+                onClick={(e) => {
+                  if ((e.target as HTMLElement).closest(".ar")) return;
                   if (i !== activeIdx) go(i);
                 }}
                 onPointerDown={(e) => handlePointerDown(e, i)}
@@ -389,10 +392,14 @@ export function SelectedWork() {
                 <div className="tp">
                   <span className="sn">{proj.num}</span>
                   <Link
-                    href={`/work`}
+                    href="/work"
                     className="ar"
-                    aria-label={`View ${proj.title}`}
-                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`View ${proj.title} in work section`}
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onPointerUp={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
                   >
                     ↗
                   </Link>
