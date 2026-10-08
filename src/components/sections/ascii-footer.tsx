@@ -452,39 +452,32 @@ export function AsciiFooter() {
         <span>© 2026 RAYZE.</span>
         <nav>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/rayze.studio/"
             target="_blank"
             rel="noopener noreferrer"
           >
             INSTAGRAM
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/company/workwithrayze"
             target="_blank"
             rel="noopener noreferrer"
           >
             LINKEDIN
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/share/19h7SSKu4j/"
             target="_blank"
             rel="noopener noreferrer"
           >
             FACEBOOK
           </a>
           <a
-            href="https://tiktok.com"
+            href="https://www.tiktok.com/@rayze.co"
             target="_blank"
             rel="noopener noreferrer"
           >
             TIKTOK
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            YOUTUBE
           </a>
         </nav>
         <a href="mailto:workwithrayze@gmail.com">workwithrayze@gmail.com</a>

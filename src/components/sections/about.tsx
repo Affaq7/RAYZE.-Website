@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { HoverPreview } from "@/components/ui/hover-preview";
 import { useEffect, useRef } from "react";
 
@@ -133,7 +134,26 @@ export function AboutSection({
 
         {/* ── 3. Story ── */}
         <div className="about-two-col rv">
-          <div className="about-two-col-left" />
+          <div className="about-two-col-left">
+            <div className="about-logo-frame">
+              <div className="about-logo-inner">
+                <Image
+                  src="/images/rayze-fluted-logo.jpg"
+                  alt="RAYZE Brand Emblem"
+                  width={600}
+                  height={600}
+                  className="about-logo-img"
+                  priority
+                />
+              </div>
+              <div className="about-logo-corners" aria-hidden="true">
+                <span className="corner top-left" />
+                <span className="corner top-right" />
+                <span className="corner bottom-left" />
+                <span className="corner bottom-right" />
+              </div>
+            </div>
+          </div>
           <div className="about-story-text">
             <p className="about-txt">
               RAYZE. is a studio for brands that refuse to blend in. We pair

@@ -1,5 +1,6 @@
 import { PageHeading } from "@/components/sections/page-heading";
 import { WorkGrid } from "@/components/sections/work";
+import { ReviewsSection } from "@/components/sections/reviews";
 import { publicContent } from "@/lib/services/public";
 import { CTA } from "@/components/layout/footer";
 export const metadata = {
@@ -19,6 +20,7 @@ export default async function Page() {
       <section className="wrap section">
         <WorkGrid projects={projects} filter />
       </section>
+      <ReviewsSection />
       <CTA />
     </>
   );

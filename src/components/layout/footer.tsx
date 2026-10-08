@@ -9,16 +9,18 @@ import { AsciiFooter } from "@/components/sections/ascii-footer";
 export function CTA() {
   return (
     <section className="cta">
-      <p className="overline">— YOUR NEXT CHAPTER</p>
-      <Link href="/contact">
-        <h2>
-          READY TO
-          <br />
-          RISE?
-        </h2>
-        <Arrow diagonal />
-      </Link>
-      <p>Let’s build something worth remembering.</p>
+      <div className="cta-inner">
+        <p className="overline">— YOUR NEXT CHAPTER</p>
+        <Link href="/contact" className="cta-link-headline">
+          <h2>
+            READY TO
+            <br />
+            RISE?
+          </h2>
+          <Arrow diagonal />
+        </Link>
+        <p className="cta-sub">Let’s build something worth remembering.</p>
+      </div>
     </section>
   );
 }
@@ -37,11 +39,10 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { label: "Instagram", href: "https://instagram.com" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
-    { label: "Facebook", href: "https://facebook.com" },
-    { label: "TikTok", href: "https://tiktok.com" },
-    { label: "YouTube", href: "https://youtube.com" },
+    { label: "Instagram", href: "https://www.instagram.com/rayze.studio/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/workwithrayze" },
+    { label: "Facebook", href: "https://www.facebook.com/share/19h7SSKu4j/" },
+    { label: "TikTok", href: "https://www.tiktok.com/@rayze.co" },
   ];
 
   return (
@@ -86,10 +87,10 @@ export function Footer() {
         <div className="footer-col">
           <span className="footer-heading">Get in touch</span>
           <a
-            href="mailto:hello@rayze.studio"
+            href="mailto:workwithrayze@gmail.com"
             className="footer-contact-link"
           >
-            hello@rayze.studio
+            workwithrayze@gmail.com
           </a>
         </div>
       </div>

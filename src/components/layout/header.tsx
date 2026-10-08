@@ -16,26 +16,71 @@ export function Brand() {
 }
 
 export function Header() {
+  const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const path = usePathname();
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
+    lastScrollYRef.current = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 20);
+
+      // At top of page, always show
+      if (currentScrollY <= 20) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollYRef.current + 3 && currentScrollY > 40) {
+        // Scrolling DOWN -> animated dismissal of navbar
+        setIsVisible(false);
+        setIsOpen(false);
+      } else if (currentScrollY < lastScrollYRef.current - 6) {
+        // Scrolling UP -> fluid reveal of navbar
+        setIsVisible(true);
+      }
+
+      lastScrollYRef.current = currentScrollY;
     };
-    handleScroll();
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close nav on route change
-  const [prevPath, setPrevPath] = useState(path);
-  if (prevPath !== path) {
-    setPrevPath(path);
+  useEffect(() => {
     setIsOpen(false);
-  }
+  }, [path]);
+
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Open on hover with debounce protection
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 220);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Close nav on click outside
   useEffect(() => {
@@ -64,7 +109,9 @@ export function Header() {
 
   return (
     <header
-      className={`site-header ${isScrolled ? "header-scrolled" : ""}`}
+      className={`site-header ${isScrolled ? "header-scrolled" : ""} ${
+        !isVisible ? "header-hidden" : ""
+      }`}
       onKeyDown={(e) => {
         if (e.key === "Escape") setIsOpen(false);
       }}
@@ -73,10 +120,12 @@ export function Header() {
         {/* Left: Brand */}
         <Brand />
 
-        {/* Right: Toggle button (3 lines by default; expands to navbar on click) */}
+        {/* Right: Navigation pill (expands on hover or click) */}
         <div
           ref={navContainerRef}
           className={`nav-pill-wrapper ${isOpen ? "is-expanded" : "is-collapsed"}`}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {/* Desktop expanded navigation pill */}
           {isOpen && (
@@ -115,7 +164,8 @@ export function Header() {
             className="nav-circle-btn"
             aria-expanded={isOpen}
             aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen((prev) => !prev)}
+            onFocus={handleMouseEnter}
           >
             <span className={`menu-burger-icon ${isOpen ? "is-open" : ""}`} aria-hidden="true">
               <span className="burger-line" />

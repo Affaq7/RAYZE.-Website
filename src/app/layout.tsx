@@ -4,6 +4,7 @@ import { siteUrl } from "@/lib/env";
 import "./globals.css";
 import { Motion } from "@/components/motion/motion";
 import { PageTransition } from "@/components/motion/page-transition";
+import { RayzeLoader } from "@/components/ui/rayze-loader";
 const inter = localFont({
   src: "../../public/fonts/inter-latin-wght-normal.woff2",
   weight: "100 900",
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body id="top">
+        <RayzeLoader />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

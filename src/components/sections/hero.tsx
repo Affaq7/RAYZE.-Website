@@ -45,9 +45,9 @@ export function Hero({
           </Link>
         </div>
 
-        {/* Bottom Right: Explore RAYZE where it is */}
+        {/* Bottom Right: Explore RAYZE */}
         <div className="hero-scroll-corner">
-          <a href="#intro">Explore RAYZE ↓</a>
+          <a href="#about-feature">Explore RAYZE ↓</a>
         </div>
       </div>
 
